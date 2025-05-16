@@ -56,7 +56,7 @@ export default function SignUp() {
           />
           <Button type="submit" className="w-full cursor-pointer" variant="outline">
             {loading ? (
-              <LoaderCircle className="w-10 h-10 animate-spin text-white shadow-2xl" />
+              <LoaderCircle className="w-10 h-10 animate-spin  shadow-2xl" />
             ) : (
               "Sign Up"
             )}

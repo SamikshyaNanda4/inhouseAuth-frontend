@@ -87,7 +87,7 @@ export default function SignIn() {
             variant="outline"
           >
             {loading ? (
-              <LoaderCircle className="w-10 h-10 animate-spin text-white" />
+              <LoaderCircle className="w-10 h-10 animate-spin " />
             ) : (
               "Sign In"
             )}

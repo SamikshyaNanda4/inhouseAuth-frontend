@@ -62,7 +62,7 @@ export default function UserPage() {
   }
 
   return (
-    <div className="relative p-6 max-w-md mx-auto bg-white dark:bg-gray-900 rounded-lg shadow-md">
+    <div className="relative p-6 max-w-10/12 h-11/12 mx-auto bg-white dark:bg-gray-900 rounded-lg shadow-md">
       {/* Top row: Name left, Logout right */}
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
@@ -80,7 +80,7 @@ export default function UserPage() {
 
       {/* Description */}
       <p className="mb-6 text-gray-700 dark:text-gray-300 italic">
-        {user.description}
+        {user.description.length>0?user.description:"No description provided.Please add a description."}
       </p>
 
       {/* Edit button bottom right */}
@@ -110,7 +110,7 @@ export default function UserPage() {
               className="w-full h-32 dark:bg-gray-800 dark:border-gray-600 resize-none"
             />
             <Button onClick={handleEdit} className="w-full cursor-pointer shadow-2xl" disabled={loading} variant="outline">
-              {loading === true ? <LucideClockFading /> : " SUBMIT"}
+              {loading === true ? <LucideClockFading className="text-bl" /> : " SUBMIT"}
             </Button>
           </DialogContent>
         </Dialog>
