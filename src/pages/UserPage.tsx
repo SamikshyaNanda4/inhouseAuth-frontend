@@ -14,6 +14,8 @@ import { Input } from "@/components/ui/input";
 import { LucideClockFading } from "lucide-react";
 import { LoaderCircle } from "lucide-react";
 import { LogOutIcon } from "lucide-react";
+import TopLeftSticky from "@/ui-component/LogoHolder";
+import logo from "../../public/logo.gif";
 
 export default function UserPage() {
   const [user, setUser] = useState<any>(null);
@@ -62,59 +64,73 @@ export default function UserPage() {
   }
 
   return (
-    <div className="relative p-6 max-w-md mx-auto bg-white dark:bg-gray-900 rounded-lg shadow-md">
-      {/* Top row: Name left, Logout right */}
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-          {user.name}
-        </h1>
-        <Button
-          onClick={logout}
-          variant="secondary"
-          className="text-sm px-3 py-1 cursor-pointer"
-        >
-          Logout
-          <LogOutIcon />
-        </Button>
-      </div>
-
-      {/* Description */}
-      <p className="mb-6 text-gray-700 dark:text-gray-300 italic">
-        {user.description}
-      </p>
-
-      {/* Edit button bottom right */}
-      <div className="flex justify-end">
-        <Dialog open={open} onOpenChange={setOpen}>
-          <Button variant="ghost" size="sm" className="cursor-pointer">
-            <DialogTrigger className="cursor-pointer">Edit</DialogTrigger>
+    <>
+      <TopLeftSticky>
+        <img
+          src="/logo.gif"
+          alt="Animated Logo"
+          className="  hover:scale-110 transition-transform"
+        />
+      </TopLeftSticky>
+      <div className="relative p-6 max-w-9/12 mx-auto bg-white dark:bg-gray-900 rounded-lg shadow-md">
+        {/* Top row: Name left, Logout right */}
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+            {user.name}
+          </h1>
+          <Button
+            onClick={logout}
+            variant="link"
+            className="text-sm px-3 py-1 cursor-pointer"
+          >
+            Logout
+            <LogOutIcon />
           </Button>
-          <DialogContent className="space-y-4 relative fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 shadow-lg rounded-lg w-full max-w-md">
-            {/* Close button top-right */}
-            <DialogClose className="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-700"></DialogClose>
+        </div>
 
-            <Input
-              className="w-full border border-gray-300 rounded px-3 py-2 dark:bg-gray-800 dark:border-gray-600 p-3 mt-3"
-              placeholder="Name here"
-              value={editData.name}
-              onChange={(e) =>
-                setEditData({ ...editData, name: e.target.value })
-              }
-            />
-            <Textarea
-              placeholder="Description here"
-              value={editData.description}
-              onChange={(e) =>
-                setEditData({ ...editData, description: e.target.value })
-              }
-              className="w-full h-32 dark:bg-gray-800 dark:border-gray-600 resize-none"
-            />
-            <Button onClick={handleEdit} className="w-full cursor-pointer shadow-2xl" disabled={loading} variant="outline">
-              {loading === true ? <LucideClockFading /> : " SUBMIT"}
+        {/* Description */}
+        <p className="mb-6 text-gray-700 dark:text-gray-300 italic">
+          {user.description.length > 0 ? user.description : "Please add a description"}
+        </p>
+
+        {/* Edit button bottom right */}
+        <div className="flex justify-end">
+          <Dialog open={open} onOpenChange={setOpen}>
+            <Button variant="ghost" size="sm" className="cursor-pointer">
+              <DialogTrigger className="cursor-pointer">Edit</DialogTrigger>
             </Button>
-          </DialogContent>
-        </Dialog>
+            <DialogContent className="space-y-4 relative fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 shadow-lg rounded-lg w-full max-w-md">
+              {/* Close button top-right */}
+              <DialogClose className="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-700"></DialogClose>
+
+              <Input
+                className="w-full border border-gray-300 rounded px-3 py-2 dark:bg-gray-800 dark:border-gray-600 p-3 mt-3"
+                placeholder="Name here"
+                value={editData.name}
+                onChange={(e) =>
+                  setEditData({ ...editData, name: e.target.value })
+                }
+              />
+              <Textarea
+                placeholder="Description here"
+                value={editData.description}
+                onChange={(e) =>
+                  setEditData({ ...editData, description: e.target.value })
+                }
+                className="w-full h-32 dark:bg-gray-800 dark:border-gray-600 resize-none"
+              />
+              <Button
+                onClick={handleEdit}
+                className="w-full cursor-pointer shadow-2xl"
+                disabled={loading}
+                variant="outline"
+              >
+                {loading === true ? <LucideClockFading /> : " SUBMIT"}
+              </Button>
+            </DialogContent>
+          </Dialog>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
